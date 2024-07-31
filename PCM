@@ -41,7 +41,7 @@ if __name__ == "__main__":
         choice = input("Enter your choice: ")
 
         if choice == '1':
-            command = input("Enter the command to create a process: ")
+            command = input("Enter the UID to create a process: ")
             create_process(command)
         elif choice == '2':
             pid = int(input("Enter the PID of the process to terminate: "))
