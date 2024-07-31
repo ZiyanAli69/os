@@ -1,0 +1,52 @@
+# prompt: Process Creation and Management Tool: Create a Script to manage process creation, termination, and status monitoring implementation
+
+import psutil
+import os
+
+def create_process(command):
+  """Creates a new process."""
+  try:
+    os.system(command)  # Use os.system to execute the command
+    print(f"Process created successfully: {command}")
+  except Exception as e:
+    print(f"Error creating process: {e}")
+
+def terminate_process(pid):
+  """Terminates a process by its PID."""
+  try:
+    process = psutil.Process(pid)
+    process.terminate()
+    print(f"Process terminated: {pid}")
+  except psutil.NoSuchProcess:
+    print(f"No process found with PID: {pid}")
+  except Exception as e:
+    print(f"Error terminating process: {e}")
+
+def monitor_processes():
+  """Monitors all running processes and prints their status."""
+  for proc in psutil.process_iter(['pid', 'name', 'status']):
+    print(proc.info)
+
+if __name__ == "__main__":
+  while True:
+    print("\nProcess Management Menu:")
+    print("1. Create Process")
+    print("2. Terminate Process")
+    print("3. Monitor Processes")
+    print("4. Exit")
+
+    choice = input("Enter your choice: ")
+
+    if choice == '1':
+      command = input("Enter the command to create a process: ")
+      create_process(command)
+    elif choice == '2':
+      pid = int(input("Enter the PID of the process to terminate: "))
+      terminate_process(pid)
+    elif choice == '3':
+      monitor_processes()
+    elif choice == '4':
+      print("Exiting The TOOL, BYE BYE!!")
+      break
+    else:
+      print("Invalid choice. Please try again.")
